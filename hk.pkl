@@ -1,7 +1,6 @@
 amends "package://github.com/jdx/hk/releases/download/v1.58.1/hk@1.58.1#/Config.pkl"
 import "package://github.com/jdx/hk/releases/download/v1.58.1/hk@1.58.1#/Builtins.pkl"
 
-local conventional_commit_types = "build,ci,docs,feat,fix,format,perf,refactor,revert,test,tooling"
 
 local linters = new Mapping<String, Step> {
     // Add linters here. Examples:
@@ -25,7 +24,10 @@ hooks {
     ["commit-msg"] {
         steps {
             ["check-conventional-commit"] {
-                check = "hk util check-conventional-commit --allowed-types \(conventional_commit_types) {{commit_msg_file}}"
+                env {
+                    ["TYPES"] = "build,ci,docs,feat,fix,format,perf,refactor,revert,test,tooling"  
+                }
+                check = "hk util check-conventional-commit --allowed-types $TYPES {{commit_msg_file}}"
             }
         }
     }
