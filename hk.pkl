@@ -2,6 +2,13 @@ amends "package://github.com/jdx/hk/releases/download/v2.0.1/hk@2.0.1#/Config.pk
 import "package://github.com/jdx/hk/releases/download/v2.0.1/hk@2.0.1#/Builtins.pkl"
 
 hooks {
+    ["check"] {
+        steps {
+            ["no-commit-to-main-or-develop"] {
+                check = "hk util no-commit-to-branch --branch main --branch develop"
+            }
+        }
+    }
     ["commit-msg"] {
         steps {
             ["check-conventional-commit"] {
