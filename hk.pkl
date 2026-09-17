@@ -1,26 +1,7 @@
-amends "package://github.com/jdx/hk/releases/download/v1.58.1/hk@1.58.1#/Config.pkl"
-import "package://github.com/jdx/hk/releases/download/v1.58.1/hk@1.58.1#/Builtins.pkl"
-
-
-local linters = new Mapping<String, Step> {
-    // Add linters here. Examples:
-    // ["prettier"] = Builtins.prettier
-    // ["eslint"] = Builtins.eslint
-    // ["ruff"] = Builtins.ruff
-
-    // Or define custom steps:
-    // ["custom"] {
-    //     glob = "**/*.py"
-    //     check = "mypy {{ files }}"
-    // }
-}
+amends "package://github.com/jdx/hk/releases/download/v2.0.1/hk@2.0.1#/Config.pkl"
+import "package://github.com/jdx/hk/releases/download/v2.0.1/hk@2.0.1#/Builtins.pkl"
 
 hooks {
-    ["pre-commit"] {
-        fix = true
-        stash = "git"
-        steps = linters
-    }
     ["commit-msg"] {
         steps {
             ["check-conventional-commit"] {
@@ -38,12 +19,5 @@ hooks {
                 stdin = "{{hook_stdin}}"
             }
         }
-    }
-    ["fix"] {
-        fix = true
-        steps = linters
-    }
-    ["check"] {
-        steps = linters
     }
 }
