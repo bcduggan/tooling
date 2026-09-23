@@ -19,6 +19,13 @@ hooks {
             }
         }
     }
+    ["prepare-commit-msg"] {
+        steps {
+            ["gitflow-conventional-commit-msg"] {
+                check = "mise run git:hooks:prepare-commit-msg:gitflow-conventional {{hook_args}} > {{commit-msg_file}}"
+            }
+        }
+    }
     ["pre-push"] {
         steps {
             ["verify-signatures"] {
